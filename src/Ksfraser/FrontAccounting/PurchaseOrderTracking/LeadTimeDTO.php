@@ -113,6 +113,21 @@ class LeadTimeDTO
         return $this->stockId;
     }
 
+    public function setExpectedDate(?\DateTimeImmutable $date): void
+    {
+        $this->expectedDate = $date;
+    }
+
+    public function setReceivedDate(?\DateTimeImmutable $date): void
+    {
+        $this->receivedDate = $date;
+    }
+
+    public function setExpectedLeadTimeDays(?int $days): void
+    {
+        $this->expectedLeadTimeDays = $days;
+    }
+
     public function getLeadTimeDays(): ?int
     {
         return $this->leadTimeDays;

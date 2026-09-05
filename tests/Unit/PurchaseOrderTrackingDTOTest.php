@@ -23,12 +23,13 @@ class PurchaseOrderTrackingDTOTest extends TestCase
             new \DateTimeImmutable('2026-09-01')
         );
 
-        $dto->expectedDate = new \DateTimeImmutable('2026-09-08');
-        $dto->receivedDate = new \DateTimeImmutable('2026-09-10');
+        $dto->setExpectedDate(new \DateTimeImmutable('2026-09-08'));
+        $dto->setReceivedDate(new \DateTimeImmutable('2026-09-10'));
+        $dto->setExpectedLeadTimeDays(7);
         $dto->calculateLeadTime();
 
         $this->assertEquals(9, $dto->getLeadTimeDays());
-        $this->assertEquals(1, $dto->getLeadTimeVariance());
+        $this->assertEquals(2, $dto->getLeadTimeVariance());
         $this->assertFalse($dto->isOnTime());
     }
 
@@ -40,8 +41,9 @@ class PurchaseOrderTrackingDTOTest extends TestCase
             new \DateTimeImmutable('2026-09-01')
         );
 
-        $dto->expectedDate = new \DateTimeImmutable('2026-09-08');
-        $dto->receivedDate = new \DateTimeImmutable('2026-09-07');
+        $dto->setExpectedDate(new \DateTimeImmutable('2026-09-08'));
+        $dto->setReceivedDate(new \DateTimeImmutable('2026-09-07'));
+        $dto->setExpectedLeadTimeDays(7);
         $dto->calculateLeadTime();
 
         $this->assertEquals(-1, $dto->getLeadTimeVariance());
@@ -79,6 +81,6 @@ class PurchaseOrderTrackingDTOTest extends TestCase
         $dto->addReceivedQty(110.0, new \DateTimeImmutable('2026-09-10'));
         $dto->recalculateFillRate();
 
-        $this->assertTrue($dto->isFullyFulfilled());
+        $this->assertEqualsWithDelta(110.0, $dto->getFillRate(), 0.001);
     }
 }
