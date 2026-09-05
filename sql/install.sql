@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS `0_ksf_po_lead_times` (
     INDEX `idx_supplier` (`supplier_id`),
     INDEX `idx_stock` (`stock_id`),
     INDEX `idx_order_date` (`order_date`),
-    INDEX `idx_lead_time` (`lead_time_days`),
-    CONSTRAINT `fk_po_leadtime_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `0_suppliers` (`supplier_id`) ON DELETE RESTRICT
+    INDEX `idx_lead_time` (`lead_time_days`)
 ) ENGINE=InnoDB;
 
 -- PO Fill Rate Tracking table
